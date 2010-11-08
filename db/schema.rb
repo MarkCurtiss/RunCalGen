@@ -10,6 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20101108003057) do
+
+  create_table "schedules", :force => true do |t|
+    t.string   "runner_category"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "race_type"
+    t.integer  "num_weeks"
+    t.string   "days"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

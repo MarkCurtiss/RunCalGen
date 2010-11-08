@@ -7,7 +7,7 @@ Feature: creating a schedule
     Given I am on the schedules page
     And I fill in "Sex" with "Male"
     And I fill in "Age" with "28"
-    And I fill in "10k" time with "54:00"
+    And I fill in "10k" time with "53:56"
     And I fill in "Race Type" with "5k"
     And I press "Submit"
-    Then I should be on the schedule detail page for "5k training plan"
+    Then I should be on the schedule detail page for "Basic Competitor 5k training plan"
