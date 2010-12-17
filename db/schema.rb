@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101108003057) do
+ActiveRecord::Schema.define(:version => 20101108040511) do
 
   create_table "schedules", :force => true do |t|
     t.string   "runner_category"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20101108003057) do
     t.string   "days"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "runner_sex"
+    t.integer  "runner_age"
   end
 
 end
