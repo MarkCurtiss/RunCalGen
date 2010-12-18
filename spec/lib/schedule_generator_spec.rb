@@ -26,4 +26,15 @@ describe ScheduleGenerator do
       ScheduleGenerator.calculate_pace(Race::MARATHON, '4:13:40').should == '9:40'
     end
   end
+
+
+  describe '#create_5k_schedule' do
+    it 'should create 3 months of training weeks for a 5k' do
+      ScheduleGenerator.create_5k_schedule.map { |tw| tw.mileage }.should == [
+        15, 15, 17, 18,
+        18, 20, 20, 18,
+        18, 15, 15, 13
+      ]
+    end
+  end
 end
