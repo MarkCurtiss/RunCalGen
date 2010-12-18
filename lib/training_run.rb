@@ -1,7 +1,7 @@
 class TrainingRun
-  attr_reader :mileage
-
   FARTLEK = 'fartlek'
+
+  attr_reader :mileage, :day_of_week
 
   def initialize(day_of_week, mileage=0, speed_training=nil)
     @day_of_week = day_of_week

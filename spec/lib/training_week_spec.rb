@@ -20,18 +20,6 @@ describe TrainingWeek do
     ]
   end
 
-  it 'should store calendar days' do
-    training_week.calendar_days.map { |cd| cd.to_s }.should == [
-      '2010-12-13',
-      '2010-12-14',
-      '2010-12-15',
-      '2010-12-16',
-      '2010-12-17',
-      '2010-12-18',
-      '2010-12-19',
-    ]
-  end
-
   it 'should raise an exception if you give it too many days' do
     lambda { 
       TrainingWeek.new((1..20).to_a, TrainingRun::FARTLEK, Date.new(2010, 12, 13)) 

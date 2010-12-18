@@ -1,5 +1,5 @@
 class TrainingWeek
-  attr_reader :training_days
+  attr_reader :training_days, :monday_starting_week
 
   def initialize(mileage_list, speed_work, monday_starting_week)
     raise(ArgumentError, "You gave me some sort of crazy week with #{mileage_list.size} days") if mileage_list.size != 7
