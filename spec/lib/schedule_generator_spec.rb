@@ -34,6 +34,10 @@ describe ScheduleGenerator do
       @race_date = Date.new(2010, 12, 05) 
     end
 
+    after(:each) do
+      Timecop.return
+    end
+
     it 'should raise an exception if there is insufficient time until the 5k' do
       lambda { 
         ScheduleGenerator.create_5k_schedule(Date.new(2010, 7, 8))
