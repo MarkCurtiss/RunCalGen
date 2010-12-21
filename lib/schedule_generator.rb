@@ -2,14 +2,10 @@ class ScheduleGenerator
   def self.calculate_pace(race_distance, time)
     race_distance  = race_distance * 1.0 #in case we get passed an integer
 
-    (seconds, minutes, hours) = Time.parse(time).to_a[0..2]
-    time_in_seconds = seconds + (minutes * 60) + (hours * 60 * 60)
-    pace_in_minutes = (time_in_seconds / race_distance) / 60
+    time_in_seconds = Time.parse(time) - Time.now.beginning_of_day
+    pace_in_seconds = time_in_seconds / race_distance
 
-    pace_minutes = pace_in_minutes.to_i
-    pace_seconds = ((pace_in_minutes - pace_in_minutes.to_i) * 60).to_i
-
-    "%d:%02d" % [ pace_minutes, pace_seconds ]
+    Time.at(pace_in_seconds).gmtime.strftime('%M:%S')
   end
 
   def self.create_5k_schedule(race_date)
