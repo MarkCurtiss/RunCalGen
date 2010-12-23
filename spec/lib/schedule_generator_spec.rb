@@ -27,33 +27,30 @@ describe ScheduleGenerator do
     end
   end
 
-
-  describe '#create_5k_schedule' do
+  describe 'create_schedule' do
     before(:each) do
-      Timecop.freeze(2010, 7, 1) 
-      @race_date = Date.new(2010, 12, 05) 
+      Timecop.freeze(2010, 7, 1)
+      @race_date = Date.new(2010, 12, 05)
     end
 
-    after(:each) do
-      Timecop.return
-    end
+    after(:each) { Timecop.return }
 
-    it 'should raise an exception if there is insufficient time until the 5k' do
+    it 'should raise an exception if there is insufficient time until the race' do
       lambda { 
-        ScheduleGenerator.create_5k_schedule(Date.new(2010, 7, 8))
+        ScheduleGenerator.create_schedule(Race::FIVE_K, Date.new(2010, 7, 8))
       }.should raise_exception(ArgumentError, 'You need 12 weeks of training.  Try 2010-09-23')
     end
 
     it 'should create 3 months of training weeks for a 5k' do
-      ScheduleGenerator.create_5k_schedule(@race_date).map { |tw| tw.mileage }.should == [
+      ScheduleGenerator.create_schedule(Race::FIVE_K, @race_date).map { |tw| tw.mileage }.should == [
         15, 15, 17, 18,
         18, 20, 20, 18,
-        18, 15, 15, 13
+        18, 15, 15, 13,
       ]
     end
 
     it 'should create 3 months of training weeks for a 5k ending on the race date' do
-      ScheduleGenerator.create_5k_schedule(@race_date).map { |tw| tw.training_days.last.day_of_week.to_s }.should == [
+      ScheduleGenerator.create_schedule(Race::FIVE_K, @race_date).map { |tw| tw.training_days.last.day_of_week.to_s }.should == [
         '2010-09-19',
         '2010-09-26',
         '2010-10-03',
@@ -66,6 +63,14 @@ describe ScheduleGenerator do
         '2010-11-21',
         '2010-11-28',
         '2010-12-05'
+      ]
+    end
+
+    it 'should create 3 months of training weeks for a 10k' do
+      ScheduleGenerator.create_schedule(Race::TEN_K, @race_date).map { |tw| tw.mileage }.should == [
+        18, 20, 21, 22,
+        24, 24, 24, 22,
+        21, 20, 20, 18,
       ]
     end
   end
