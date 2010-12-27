@@ -66,6 +66,13 @@ describe ScheduleGenerator do
       ]
     end
 
+    it 'should let you specify whether the long runs are on sunday or saturday' do
+      schedule = ScheduleGenerator.create_schedule(Race::HALF_MARATHON, @race_date, true)
+
+      schedule.first.training_days.map { |tr| tr.mileage }.should == [ 0, 2, 4, 2, 0, 2,  8, ]
+      schedule.last.training_days.map  { |tr| tr.mileage }.should == [ 0, 3, 4, 2, 2, 13, 0, ]
+    end
+
     it 'should create 3 months of training weeks for a 10k' do
       ScheduleGenerator.create_schedule(Race::TEN_K, @race_date).map { |tw| tw.mileage }.should == [
         18, 20, 21, 22,

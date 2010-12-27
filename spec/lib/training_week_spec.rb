@@ -20,6 +20,12 @@ describe TrainingWeek do
     ]
   end
 
+  it 'should assign the long run to sunday if instructed' do
+    tw = TrainingWeek.new(mileage_list, TrainingRun::FARTLEK, Date.new(2010, 12, 13), true)
+
+    tw.training_days.map { |td| td.mileage }.should == [ 0, 3, 3, 2, 0, 2, 5, ]
+  end
+
   it 'should raise an exception if you give it too many days' do
     lambda { 
       TrainingWeek.new((1..20).to_a, TrainingRun::FARTLEK, Date.new(2010, 12, 13)) 

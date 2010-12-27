@@ -61,7 +61,7 @@ class ScheduleGenerator
     Time.at(pace_in_seconds).gmtime.strftime('%M:%S')
   end
 
-  def self.create_schedule(race_type, race_date)
+  def self.create_schedule(race_type, race_date, long_run_on_sunday=false)
     start_date = race_date - (12 * 7)
     unless start_date >= Date.today
       raise(ArgumentError, "You need 12 weeks of training.  Try #{Date.today + 12 * 7}")
@@ -84,7 +84,8 @@ class ScheduleGenerator
       schedule.push(TrainingWeek.new(
         mileage_lists[i],
         TrainingRun::FARTLEK,
-        (start_date + (i+1) * 7).monday
+        (start_date + (i+1) * 7).monday,
+        long_run_on_sunday
       ))
     end
 
