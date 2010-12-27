@@ -73,5 +73,13 @@ describe ScheduleGenerator do
         21, 20, 20, 18,
       ]
     end
+
+    it 'should create 3 months of training weeks for a half-marathon' do
+      ScheduleGenerator.create_schedule(Race::HALF_MARATHON, @race_date).map { |tw| tw.mileage }.should == [
+        18, 20, 24, 27,
+        30, 30, 26, 30,
+        26, 25, 23, 24,
+      ]
+    end
   end
 end

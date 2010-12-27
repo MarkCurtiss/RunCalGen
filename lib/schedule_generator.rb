@@ -32,6 +32,23 @@ module MileageLists
       [ 0, 4, 4, 3, 0, 6, 3, ],
       [ 0, 3, 4, 3, 2, 0, 6, ],
     ]
+
+    HALF_MARATHON = [
+      [ 0, 2, 4, 2, 0,  8, 2, ],
+      [ 0, 2, 4, 2, 0, 10, 2, ],
+      [ 0, 2, 5, 2, 0, 12, 3, ],
+      [ 0, 4, 5, 4, 4, 0, 10, ],
+
+      [ 0, 5, 5, 5, 0, 13, 2, ],
+      [ 0, 5, 5, 5, 0, 13, 2, ],
+      [ 0, 5, 5, 4, 4, 2,  6, ],
+      [ 0, 5, 5, 5, 0, 13, 2, ],
+
+      [ 0, 5, 5, 4, 4, 0,  8, ],
+      [ 0, 4, 5, 4, 0, 10, 2, ],
+      [ 0, 4, 5, 4, 0, 8,  2, ],
+      [ 0, 3, 4, 2, 2, 0, 13, ],
+    ]
 end
 
 class ScheduleGenerator
@@ -57,6 +74,8 @@ class ScheduleGenerator
         MileageLists::FIVE_K
       when Race::TEN_K
         MileageLists::TEN_K
+      when Race::HALF_MARATHON
+        MileageLists::HALF_MARATHON
       else
         MileageLists::FIVE_K
       end
