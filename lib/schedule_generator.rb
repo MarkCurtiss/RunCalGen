@@ -49,6 +49,28 @@ module MileageLists
       [ 0, 4, 5, 4, 0, 8,  2, ],
       [ 0, 3, 4, 2, 2, 0, 13, ],
     ]
+
+    MARATHON = [
+      [ 0, 3, 4, 4, 0, 8,  3, ],
+      [ 0, 4, 4, 4, 0, 10, 3, ],
+      [ 0, 3, 5, 3, 0, 13, 3, ],
+      [ 0, 6, 5, 4, 4, 3,  8, ],
+
+      [ 0, 4, 5, 5, 0, 15, 3, ],
+      [ 0, 6, 5, 6, 0, 12, 6, ],
+      [ 0, 5, 5, 4, 0, 18, 3, ],
+      [ 0, 6, 6, 6, 4, 0, 13, ],
+
+      [ 0, 5, 6, 6, 0, 20, 3, ],
+      [ 0, 6, 5, 5, 5, 3,  6, ],
+      [ 0, 6, 6, 5, 0, 20, 3, ],
+      [ 0, 6, 6, 6, 4, 0, 13, ],
+
+      [ 0, 5, 6, 6, 0, 20, 3, ],
+      [ 0, 6, 6, 6, 6, 0,  8, ],
+      [ 0, 5, 5, 4, 0, 8,  3, ],
+      [ 0, 4, 4, 3, 0, 2, 26, ],
+    ]
 end
 
 class ScheduleGenerator
@@ -62,11 +84,6 @@ class ScheduleGenerator
   end
 
   def self.create_schedule(race_type, race_date, long_run_on_sunday=false)
-    start_date = race_date - (12 * 7)
-    unless start_date >= Date.today
-      raise(ArgumentError, "You need 12 weeks of training.  Try #{Date.today + 12 * 7}")
-    end
-
     schedule = []
 
     mileage_lists = case race_type
@@ -76,9 +93,17 @@ class ScheduleGenerator
         MileageLists::TEN_K
       when Race::HALF_MARATHON
         MileageLists::HALF_MARATHON
+      when Race::MARATHON
+        MileageLists::MARATHON
       else
         MileageLists::FIVE_K
       end
+
+    num_weeks = mileage_lists.size
+    start_date = race_date - (num_weeks * 7)
+    unless start_date >= Date.today
+      raise(ArgumentError, "You need #{num_weeks} weeks of training.  Try a race date of #{Date.today + num_weeks * 7}")
+    end
 
     mileage_lists.each_index do |i|
       schedule.push(TrainingWeek.new(
