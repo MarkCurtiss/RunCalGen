@@ -9,10 +9,12 @@ class TrainingRun
     @speed_training = speed_training
   end
 
-  def to_s
-    "#{@day_of_week.strftime('%A')}: " + 
-    "#{@mileage > 0 ? @mileage.to_s + ' miles': 'Off'}" + 
+  def activity
+    "#{@mileage > 0 ? @mileage.to_s + ' miles': 'Off'}" +
     "#{@speed_training ? ' (' + @speed_training + ')' : ''}"
   end
-end
 
+  def to_s
+    "#{@day_of_week.strftime('%A')}: " + self.activity
+  end
+end
