@@ -5,6 +5,7 @@ gem 'haml-rails'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'inherited_resources'
 gem 'escape_utils'
+gem 'ri_cal'
 
 group :development, :test do
  gem 'webrat'

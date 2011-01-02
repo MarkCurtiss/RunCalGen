@@ -110,6 +110,7 @@ GEM
       thor (~> 0.14.0)
     rake (0.8.7)
     responders (0.6.2)
+    ri_cal (0.8.7)
     rspec (2.0.0)
       rspec-core (= 2.0.0)
       rspec-expectations (= 2.0.0)
@@ -158,6 +159,7 @@ DEPENDENCIES
   inherited_resources
   launchy
   rails (= 3.0.1)
+  ri_cal
   rspec-rails
   spork
   sqlite3-ruby
