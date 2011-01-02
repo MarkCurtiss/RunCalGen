@@ -1,39 +1,3 @@
-module MileageLists
-  FIVE_K = [
-      [ 0, 3, 3, 2, 0, 5, 2, ],
-      [ 0, 3, 3, 2, 0, 5, 2, ],
-      [ 0, 3, 3, 3, 0, 5, 3, ],
-      [ 0, 3, 3, 3, 3, 0, 6, ],
-
-      [ 0, 3, 3, 3, 0, 6, 3, ],
-      [ 0, 4, 4, 3, 0, 6, 3, ],
-      [ 0, 4, 4, 3, 0, 6, 3, ],
-      [ 0, 4, 3, 4, 3, 0, 4, ],
-
-      [ 0, 3, 4, 3, 0, 5, 3, ],
-      [ 0, 3, 3, 2, 3, 0, 4, ],
-      [ 0, 3, 4, 2, 0, 4, 2, ],
-      [ 0, 3, 3, 2, 2, 0, 3, ],
-    ]
-
-    TEN_K = [
-      [ 0, 3, 4, 2, 0, 6, 3,  ],
-      [ 0, 3, 4, 2, 0, 8, 3,  ],
-      [ 0, 3, 4, 2, 2, 8, 2,  ],
-      [ 0, 3, 4, 3, 2, 0, 10, ],
-
-      [ 0, 4, 4, 4, 0, 8, 4, ],
-      [ 0, 4, 4, 4, 4, 3, 5, ],
-      [ 0, 4, 4, 4, 0, 8, 4, ],
-      [ 0, 4, 4, 4, 3, 0, 7, ],
-
-      [ 0, 4, 4, 3, 0, 8, 2, ],
-      [ 0, 3, 5, 4, 3, 0, 5, ],
-      [ 0, 4, 4, 3, 0, 6, 3, ],
-      [ 0, 3, 4, 3, 2, 0, 6, ],
-    ]
-end
-
 class ScheduleGenerator
   def self.calculate_pace(race_distance, time)
     race_distance  = race_distance * 1.0 #in case we get passed an integer
@@ -44,12 +8,7 @@ class ScheduleGenerator
     Time.at(pace_in_seconds).gmtime.strftime('%M:%S')
   end
 
-  def self.create_schedule(race_type, race_date)
-    start_date = race_date - (12 * 7)
-    unless start_date >= Date.today
-      raise(ArgumentError, "You need 12 weeks of training.  Try #{Date.today + 12 * 7}")
-    end
-
+  def self.create_schedule(race_type, race_date, long_run_on_sunday=false)
     schedule = []
 
     mileage_lists = case race_type
@@ -57,15 +16,26 @@ class ScheduleGenerator
         MileageLists::FIVE_K
       when Race::TEN_K
         MileageLists::TEN_K
+      when Race::HALF_MARATHON
+        MileageLists::HALF_MARATHON
+      when Race::MARATHON
+        MileageLists::MARATHON
       else
         MileageLists::FIVE_K
       end
+
+    num_weeks = mileage_lists.size
+    start_date = race_date - (num_weeks * 7)
+    unless start_date >= Date.today
+      raise(ArgumentError, "You need #{num_weeks} weeks of training.  Try a race date of #{Date.today + num_weeks * 7}")
+    end
 
     mileage_lists.each_index do |i|
       schedule.push(TrainingWeek.new(
         mileage_lists[i],
         TrainingRun::FARTLEK,
-        (start_date + (i+1) * 7).monday
+        (start_date + (i+1) * 7).monday,
+        long_run_on_sunday
       ))
     end
 

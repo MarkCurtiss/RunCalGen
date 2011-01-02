@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ScheduleGenerator do
   describe '#calculate_pace' do
-    it 'should determine pace for a 5k race' do 
+    it 'should determine pace for a 5k race' do
       ScheduleGenerator.calculate_pace(Race::FIVE_K, '00:25:56').should == '08:20'
     end
 
@@ -36,9 +36,9 @@ describe ScheduleGenerator do
     after(:each) { Timecop.return }
 
     it 'should raise an exception if there is insufficient time until the race' do
-      lambda { 
-        ScheduleGenerator.create_schedule(Race::FIVE_K, Date.new(2010, 7, 8))
-      }.should raise_exception(ArgumentError, 'You need 12 weeks of training.  Try 2010-09-23')
+      lambda {
+        ScheduleGenerator.create_schedule(Race::MARATHON, Date.new(2010, 7, 8))
+      }.should raise_exception(ArgumentError, 'You need 16 weeks of training.  Try a race date of 2010-10-21')
     end
 
     it 'should create 3 months of training weeks for a 5k' do
@@ -66,11 +66,35 @@ describe ScheduleGenerator do
       ]
     end
 
+    it 'should let you specify whether the long runs are on sunday or saturday' do
+      schedule = ScheduleGenerator.create_schedule(Race::HALF_MARATHON, @race_date, true)
+
+      schedule.first.training_days.map { |tr| tr.mileage }.should == [ 0, 2, 4, 2, 0, 2,  8, ]
+      schedule.last.training_days.map  { |tr| tr.mileage }.should == [ 0, 3, 4, 2, 2, 13, 0, ]
+    end
+
     it 'should create 3 months of training weeks for a 10k' do
       ScheduleGenerator.create_schedule(Race::TEN_K, @race_date).map { |tw| tw.mileage }.should == [
         18, 20, 21, 22,
         24, 24, 24, 22,
         21, 20, 20, 18,
+      ]
+    end
+
+    it 'should create 3 months of training weeks for a half-marathon' do
+      ScheduleGenerator.create_schedule(Race::HALF_MARATHON, @race_date).map { |tw| tw.mileage }.should == [
+        18, 20, 24, 27,
+        30, 30, 26, 30,
+        26, 25, 23, 24,
+      ]
+    end
+
+    it 'should create 4 months of training weeks for a full marathon' do
+      ScheduleGenerator.create_schedule(Race::MARATHON, @race_date).map { |tw| tw.mileage }.should == [
+        22, 25, 27, 30,
+        32, 35, 35, 35,
+        40, 30, 40, 35,
+        40, 32, 25, 39
       ]
     end
   end
