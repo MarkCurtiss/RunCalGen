@@ -3,5 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 *.sw?
+*.diff
 .DS_Store
+.rspec
 public/stylesheets/compiled/*.css
