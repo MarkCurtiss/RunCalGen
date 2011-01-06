@@ -7,7 +7,12 @@ module Race
   HALF_MARATHON = 13.109375
   MARATHON = 26.21875
 
-  RACE_TYPES = [ FIVE_K, TEN_K, HALF_MARATHON, MARATHON ]
+  RACE_TYPES = {
+     FIVE_K => '5k',
+     TEN_K => '10k',
+     HALF_MARATHON => 'Half-Marathon',
+     MARATHON => 'Marathon',
+  }
 end
 
 module MileageLists

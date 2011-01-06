@@ -1,6 +1,6 @@
 = form_for @schedule do |form| 
   = form.label(:race_type, 'Race Type')
-  = form.select(:race_type, [ '5k', '10k', 'Half-Marathon', 'Marathon' ].zip(Race::RACE_TYPES))
+  = form.select(:race_type, Race::RACE_TYPES.invert.to_a)
   = form.label(:race_date, 'Race Date')
   = form.text_field(:race_date)
   = form.submit('Download Schedule')

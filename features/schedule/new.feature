@@ -9,4 +9,4 @@ Feature: creating a schedule
     And I select "5k" from "Race Type"
     And I fill in "Race Date" with "2010-12-05"
     And I press "Download Schedule"
-    Then I should download a file called 'schedule_for_3.10685596_2010-12-05.ics'
+    Then I should download a file called '5k_schedule_for_2010-12-05.ics'

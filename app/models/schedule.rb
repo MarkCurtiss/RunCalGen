@@ -25,7 +25,7 @@ class Schedule
   end
 
   def filename
-    "schedule_for_#{race_type}_#{race_date}.ics"
+    "#{Race::RACE_TYPES[race_type]}_schedule_for_#{race_date}.ics"
   end
 
   def to_file

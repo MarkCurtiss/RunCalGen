@@ -4,6 +4,6 @@ end
 
 
 Then /^I should download a file called '(.*)'$/ do |filename|
-  assert_match(/^attachment;/, page.response_headers['Content-Disposition'], "The response was not an attachment.")
-  assert_match(/^text\/calendar(?:$|;)/, page.response_headers['Content-Type'])
+  assert_match(/^text\/calendar/, page.response_headers['Content-Type'], 'The response was not a calendar file')
+  assert_match(/^attachment; filename="#{filename}"/, page.response_headers['Content-Disposition'], 'The filenames did not match')
 end
