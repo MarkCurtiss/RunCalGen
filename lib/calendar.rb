@@ -20,6 +20,7 @@ class Calendar
   def write_ical_file(filename)
     File.open(filename, 'w') do |f|
       f.write(@cal.to_s)
+      f.path
     end
   end
 end

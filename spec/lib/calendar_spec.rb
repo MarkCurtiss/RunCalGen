@@ -29,8 +29,9 @@ describe Calendar do
 
       filename = '/tmp/half_marathon.ics'
       File.unlink(filename) if File.exists?(filename)
-      obj_cal.write_ical_file(filename)
-      components = RiCal.parse(File.open(filename))
+      components = RiCal.parse(
+        File.open(obj_cal.write_ical_file(filename))
+      )
       file_cal = components[0]
 
       file_cal.events.should == obj_cal.events

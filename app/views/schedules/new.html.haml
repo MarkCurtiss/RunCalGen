@@ -1,10 +1,6 @@
 = form_for @schedule do |form| 
-  = form.label(:runner_sex, 'Sex')
-  = form.text_field(:runner_sex)
-  = form.label(:runner_age, 'Age')
-  = form.number_field(:runner_age, :min => 12)
-  = label_tag('ten_k_time', '10k Time')
-  = text_field_tag('ten_k_time')
   = form.label(:race_type, 'Race Type')
-  = form.text_field(:race_type)
-  = form.submit
+  = form.select(:race_type, [ '5k', '10k', 'Half-Marathon', 'Marathon' ].zip(Race::RACE_TYPES))
+  = form.label(:race_date, 'Race Date')
+  = form.text_field(:race_date)
+  = form.submit('Download Schedule')

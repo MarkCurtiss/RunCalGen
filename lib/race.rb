@@ -6,6 +6,8 @@ module Race
 
   HALF_MARATHON = 13.109375
   MARATHON = 26.21875
+
+  RACE_TYPES = [ FIVE_K, TEN_K, HALF_MARATHON, MARATHON ]
 end
 
 module MileageLists
