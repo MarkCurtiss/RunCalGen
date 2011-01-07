@@ -3,9 +3,9 @@ class Schedule
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :race_type, :race_date, :calendar
+  attr_accessor :race_type, :race_date, :long_run_on_sunday, :calendar
 
-  validates_presence_of :race_type, :race_date
+  validates_presence_of :race_type, :race_date, :long_run_on_sunday
 
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -15,7 +15,7 @@ class Schedule
     unless attributes.empty?
       self.race_date = Date.parse(attributes[:race_date])
       self.race_type = race_type.to_f
-      schedule = ScheduleGenerator.create_schedule(self.race_type, self.race_date)
+      schedule = ScheduleGenerator.create_schedule(self.race_type, self.race_date, self.long_run_on_sunday)
       self.calendar = Calendar.new(schedule)
     end
   end
