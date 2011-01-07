@@ -3,18 +3,14 @@
   = form.select(:race_type, Race::RACE_TYPES.invert.to_a)
   = form.label(:race_date, 'Race Date')
   = form.text_field(:race_date, :id => 'datepicker')
-  %table
-    %thead
-      %tr
-      %td Long Run Day
-    %tbody
-      %tr
-        %td Saturday
-        %td= form.radio_button(:long_run_on_sunday, 'Saturday')
-      %tr
-        %td Sunday
-        %td= form.radio_button(:long_run_on_sunday, 'Sunday', { checked: true })
+  %div#radio
+    Long Run Day:
+    = form.radio_button(:long_run_on_sunday, false, { id: 'radio1' })
+    = label_tag('radio1', 'Saturday')
+    = form.radio_button(:long_run_on_sunday, true, { id: 'radio2', checked: true })
+    = label_tag('radio2', 'Sunday')
   = form.submit('Download Schedule')
 
 :javascript
   $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+  $( "#radio" ).buttonset();

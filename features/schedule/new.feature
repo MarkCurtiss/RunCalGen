@@ -8,5 +8,6 @@ Feature: creating a schedule
     And it is '2010-07-01'
     And I select "5k" from "Race Type"
     And I fill in "datepicker" with "2010-12-05"
+    And I choose "Saturday"
     And I press "Download Schedule"
     Then I should download a file called '5k_schedule_for_2010-12-05.ics'
