@@ -2,5 +2,8 @@
   = form.label(:race_type, 'Race Type')
   = form.select(:race_type, Race::RACE_TYPES.invert.to_a)
   = form.label(:race_date, 'Race Date')
-  = form.text_field(:race_date)
+  = form.text_field(:race_date, :id => 'datepicker')
   = form.submit('Download Schedule')
+
+:javascript
+  $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
