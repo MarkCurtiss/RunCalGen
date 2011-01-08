@@ -2,11 +2,19 @@
   %head
     %title Running Schedule Generator
     = stylesheet_link_tag 'cupertino/jquery-ui-1.8.7.custom.css'
+    = stylesheet_link_tag 'main.css'
     = javascript_include_tag :defaults
     = csrf_meta_tag
 
-  %body
-    = yield
+
+  %div#wrap
+    %body
+      %div#header
+      %div#nav
+      %div#main
+        = yield
+      %div#sidebar
+      %div#footer
 
   :javascript
     $(function() {

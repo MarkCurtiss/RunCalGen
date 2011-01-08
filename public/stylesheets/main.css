@@ -1,0 +1,40 @@
+body,
+html {
+  margin:0;
+  padding:0;
+  color:#000;
+  background:#E9FFFF;
+}
+
+#wrap {
+  width:750px;
+  margin:0 auto;
+}
+
+#header {
+  height: 100px;
+}
+#nav {
+  background:#c99;
+}
+
+#sidebar {
+  background:#c9c;
+}
+#footer {
+  clear: both;
+  background:#cc9;
+}
+
+#main {
+  float: left;
+  width: 500px;
+  font-family: Helvetica, Monaco;
+  font-size: 24;
+}
+
+#sidebar {
+  float:right;
+  width:250px;
+  background:#c9c;
+}
