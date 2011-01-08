@@ -2,8 +2,9 @@ body,
 html {
   margin:0;
   padding:0;
-  color:#000;
-  background:#E9FFFF;
+  height: 100%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#E9FFFF), to(#000000));
+  background: -moz-linear-gradient(top,  #E9FFFF, #000000) no-repeat;
 }
 
 #wrap {
