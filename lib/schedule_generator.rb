@@ -24,6 +24,19 @@ class ScheduleGenerator
         MileageLists::FIVE_K
       end
 
+    speed_training = case race_type
+      when Race::FIVE_K
+        SpeedTrainingLists::FIVE_K
+      when Race::TEN_K
+        SpeedTrainingLists::TEN_K
+      when Race::HALF_MARATHON
+        SpeedTrainingLists::HALF_MARATHON
+      when Race::MARATHON
+        SpeedTrainingLists::MARATHON
+      else
+        SpeedTrainingLists::FIVE_K
+      end
+
     num_weeks = mileage_lists.size
     start_date = race_date - (num_weeks * 7)
     unless start_date >= Date.today
@@ -33,7 +46,7 @@ class ScheduleGenerator
     mileage_lists.each_index do |i|
       schedule.push(TrainingWeek.new(
         mileage_lists[i],
-        TrainingRun::FARTLEK,
+        speed_training[i],
         (start_date + (i+1) * 7).monday,
         long_run_on_sunday
       ))

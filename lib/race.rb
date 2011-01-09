@@ -89,3 +89,69 @@ module MileageLists
       [ 0, 4, 4, 3, 0, 2, 26, ],
     ]
 end
+
+module SpeedTrainingLists
+  FIVE_K = <<END.split("\n")
+modified fartlek
+3-4 x long-hill repeats
+2-mile tempo run
+3-4 x half-mile, 5k pace
+4-5 x short-hill repeats
+2-3 x mile, 5k fast pace
+3-4 x half-mile, fast pace
+4-5 x quarter-mile, fast pace
+2-3 x mile, 5k-fast pace
+4-5 x quarter-mile, fast pace
+cut down: mile, 3/4, 1/2, 1/4; fast-hard pace
+strides
+END
+
+  TEN_K = <<END.split("\n")
+modified fartlek
+3-4 x long-hill repeats
+2-mile tempo run
+4-6 x half-mile, 5k-10k pace
+4-5 x short-hill repeats
+3-mile tempo run
+2-3 x mile, 5k-fast pace
+4-5 x quarter-mile, fast pace
+3-4 x half-mile, fast pace
+tempo intervals, 2 x 1.5 miles
+2-3 x mile, at 5k-fast pace
+strides
+END
+
+  HALF_MARATHON = <<END.split("\n")
+2-mile tempo run
+3-4 x long-hill repeats
+tempo intervals, 2 x 1.5 miles
+2-4 x mile, 5k-10k pace
+3-mile tempo run
+4-6 x half-mile, 5k-10k pace
+1-2 x 1.5 miles, 5k-10k pace
+2-3 x mile, 5k-fast pace
+tempo run, 4 miles, half-marathon pace
+3-4 x half-mile, fast pace
+2-3 x mile, 5k to fast pace
+tempo intervals, 6 x 1/2 mile
+END
+
+  MARATHON = <<END.split("\n")
+2-mile tempo run
+3-4 x long-hill repeats
+2-4 x mile, 5k-10k pace
+3-4 x long-hill repeats
+fartlek
+4-6 x half-mile, 5k-10k pace
+2-3 x mile, 5k-fast pace
+tempo intervals, 2 x 1.5 miles
+
+1-2 x 1.5 miles, 5k-10k pace
+4-mile tempo run, half-marathon pace
+tempo intervals, 2 x 2 miles
+
+3-4 x half-mile, fast pace
+2-3 x mile, 5k-fast pace
+3 miles at marathon pace
+END
+end
