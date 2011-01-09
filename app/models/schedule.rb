@@ -31,6 +31,6 @@ class Schedule
   end
 
   def to_file
-    self.calendar.write_ical_file(Tempfile.new('schedule'))
+    self.calendar.write_ical_file(Tempfile.new("#{::Rails.root.to_s}/tmp/schedule_#{Process.pid}"))
   end
 end
