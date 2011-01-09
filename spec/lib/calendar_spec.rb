@@ -13,13 +13,18 @@ describe Calendar do
     it 'should initialize from a schedule' do
       cal = Calendar.new(@schedule)
 
-      first_event = cal.events.first
-      first_event.start_time.should == Date.new(2010, 10, 4)
-      first_event.summary.should == 'Off'
-
       last_event = cal.events.last
       last_event.start_time.should == @race_date
       last_event.summary.should == '13 miles'
+    end
+
+    it 'should not include off days' do
+      cal = Calendar.new(@schedule)
+
+      first_event = cal.events.first
+      #skip the 'Off' on the 4th
+      first_event.start_time.should == Date.new(2010, 10, 5)
+      first_event.summary.should == '2 miles'
     end
   end
 

@@ -2,7 +2,7 @@ class Calendar
   def initialize(schedule)
     @cal = RiCal.Calendar do
       schedule.each do |tw|
-        tw.training_days.each do |td|
+        tw.training_days.reject { |x| x.activity == 'Off' }.each do |td|
           event do
             summary    td.activity
             dtstart    td.day_of_week
