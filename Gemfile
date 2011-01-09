@@ -19,5 +19,5 @@ group :development, :test do
  gem 'timecop'
  gem 'autotest-rails'
  gem 'autotest-growl'
- gem 'autotest-fsevent'
+ gem 'autotest-fsevent' if RUBY_PLATFORM =~ /darwin/
 end
