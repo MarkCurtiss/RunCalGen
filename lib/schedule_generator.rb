@@ -11,30 +11,17 @@ class ScheduleGenerator
   def self.create_schedule(race_type, race_date, long_run_on_sunday=false)
     schedule = []
 
-    mileage_lists = case race_type
+    mileage_lists, speed_training = case race_type
       when Race::FIVE_K
-        MileageLists::FIVE_K
+        [ MileageLists::FIVE_K, SpeedTrainingLists::FIVE_K ]
       when Race::TEN_K
-        MileageLists::TEN_K
+        [ MileageLists::TEN_K, SpeedTrainingLists::TEN_K ]
       when Race::HALF_MARATHON
-        MileageLists::HALF_MARATHON
+        [ MileageLists::HALF_MARATHON, SpeedTrainingLists::HALF_MARATHON ]
       when Race::MARATHON
-        MileageLists::MARATHON
+        [ MileageLists::MARATHON, SpeedTrainingLists::MARATHON ]
       else
-        MileageLists::FIVE_K
-      end
-
-    speed_training = case race_type
-      when Race::FIVE_K
-        SpeedTrainingLists::FIVE_K
-      when Race::TEN_K
-        SpeedTrainingLists::TEN_K
-      when Race::HALF_MARATHON
-        SpeedTrainingLists::HALF_MARATHON
-      when Race::MARATHON
-        SpeedTrainingLists::MARATHON
-      else
-        SpeedTrainingLists::FIVE_K
+        [ MileageLists::FIVE_K, SpeedTrainingLists::FIVE_K ]
       end
 
     num_weeks = mileage_lists.size
