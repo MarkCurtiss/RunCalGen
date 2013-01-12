@@ -38,7 +38,7 @@ describe ScheduleGenerator do
     it 'should raise an exception if there is insufficient time until the race' do
       lambda {
         ScheduleGenerator.create_schedule(Race::MARATHON, Date.new(2010, 7, 8))
-      }.should raise_exception(ArgumentError, 'You need 16 weeks of training.  Try a race date of 2010-10-21')
+      }.should raise_exception(ArgumentError, 'You need 16 weeks of training.  Try a race date of 2010-10-20')
     end
 
     it 'should let you specify whether the long runs are on sunday or saturday' do

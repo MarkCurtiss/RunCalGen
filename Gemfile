@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.1'
+gem 'rails', '3.2.11'
 gem 'haml-rails'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'inherited_resources'
@@ -11,8 +11,8 @@ group :development, :test do
  gem 'webrat'
  gem 'capybara'
  gem 'database_cleaner'
- gem 'cucumber-rails'
  gem 'cucumber'
+ gem 'cucumber-rails', :require => false
  gem 'rspec-rails'
  gem 'spork'
  gem 'launchy'
@@ -20,3 +20,4 @@ group :development, :test do
  gem 'autotest-rails'
  gem 'autotest-growl'
 end
+
